@@ -1,3 +1,2 @@
-### Engatinhando na Linguagem Python
 
 
