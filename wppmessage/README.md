@@ -6,7 +6,7 @@
 
 ![Mensagem de erro](https://github.com/oliveiradeflavio/python/blob/master/wppmessage/imagens/wppmessage-error.png)
 
-
+[em funcionamento](https://www.linkedin.com/posts/fladoliveira_interface-usei-o-qtdesign-e-a-linguagem-python-ugcPost-6794717202772721664-qER6)    
 
 ###### 
 Instalar a biblioteca PyWhatkit
