@@ -6,11 +6,10 @@
 
 ![Mensagem de erro](https://github.com/oliveiradeflavio/python/blob/master/wppmessage/imagens/wppmessage-error.png)
 
-![Wpp Message envio multiplo]()
+![Wpp Message envio multiplo tela](https://github.com/oliveiradeflavio/python/blob/master/wppmessage/imagens/wppmessagemulti-screen.png)
+
 
 [Wpp Message Envio para 1 número](https://www.linkedin.com/posts/fladoliveira_interface-usei-o-qtdesign-e-a-linguagem-python-ugcPost-6794717202772721664-qER6)    
-
-[Wpp Message Envio Multiplo Números]()
 
 ###### Bibliotecas Usadas
 Instalar a biblioteca Pandas 
