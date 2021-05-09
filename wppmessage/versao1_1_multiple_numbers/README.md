@@ -13,6 +13,10 @@
 
 [Wpp Message Envio para Vários Números](https://www.linkedin.com/posts/fladoliveira_python-programming-activity-6795549380347871232-fbPz)
 
+###### Planilha de números
+No projeto tem uma planilha em excel, onde tem o modelo de como deve estar configurado 
+os número de whatsApp.
+
 ###### Bibliotecas Usadas
 Instalar a biblioteca Pandas 
 >pip install pandas
