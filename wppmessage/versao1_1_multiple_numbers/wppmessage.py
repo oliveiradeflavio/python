@@ -12,9 +12,8 @@
 
 import pywhatkit as kit
 import pandas as pd
-import time
-import os
-import platform
+import keyboard
+from sys import platform
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -162,6 +161,10 @@ class Ui_MainWindow(object):
                     kit.sendwhatmsg("+55"+str(i), mensagem, int(h),int(m),1)
                     m = int(m) + 1
                     print(m)
+                    if platform == 'win32' or platform == 'linux':
+                        keyboard.press_and_release('ctrl + w')
+                    else:
+                        keyboard.press_and_release('command + w')
                 showMessage("Mensagem Enviada")
                 self.frame_error.setStyleSheet(self.stylePopupOk)
                 limpaCampos(self) 
@@ -170,6 +173,10 @@ class Ui_MainWindow(object):
                     kit.sendwhatmsg("+55"+str(i), mensagem, int(h),int(m),1)
                     m = int(m) + 1
                     print(m)
+                    if platform == 'win32' or platform == 'linux':
+                        keyboard.press_and_release('ctrl + w')
+                    else:
+                        keyboard.press_and_release('command + w')
                 showMessage("Mensagem Enviada")
                 self.frame_error.setStyleSheet(self.stylePopupOk)
                 limpaCampos(self) 

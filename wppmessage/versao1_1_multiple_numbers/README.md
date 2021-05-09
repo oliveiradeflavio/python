@@ -29,6 +29,12 @@ Instalar a biblioteca openpyxl
 Instalar a biblioteca PyWhatkit
 >pip install pywhatkit
 
+Instalar a biblioteca platform
+>pip install platform
+
+Instalar a biblioteca keyboard
+>pip install keyboard
+
 PyWhatKit é uma biblioteca Python com vários recursos úteis. É uma biblioteca fácil de usar que não requer configuração adicional. 
 
 
