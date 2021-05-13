@@ -44,7 +44,7 @@ class instagramBot:
         campo_verificacao_codigo.send_keys(self.verificacaoCodigo)
         campo_verificacao_codigo.send_keys(Keys.RETURN)
         time.sleep(3)
-        self.comentar_nas_fotos_com_hastag('shotoniphone')
+        self.comentar_nas_fotos_com_hastag('sunsire')
 
     #digitando os comentário na velocidade humanos, as vezes acelerando as vezes um pouco mais lento.
     @staticmethod
@@ -76,6 +76,10 @@ class instagramBot:
             try:
                 comentarios = ["Caramba! Tá top!","Essa foto ficou demais viu!", "Só fooootão","Curti muito essa foto!","Que fotão!!!!","Tooooop!!!","Eitaaaaaa que foto =D"]
                 driver.find_element_by_class_name('Ypffh').click()
+                curtir_post = driver.find_element_by_xpath("//span[@class='fr66n']")
+                curtir_post.click()
+                time.sleep(2)
+                print("like")
                 campo_comentario = driver.find_element_by_class_name('Ypffh')
                 time.sleep(random.randint(2,5))
                 #chama a função para que seja digitando mais lento ou mais rapido "como humano e não um bot"
@@ -89,5 +93,5 @@ class instagramBot:
                 time.sleep(5)
 
 verificacaoCodigo = input("Digite o código de verificação: ")
-flavioBot = instagramBot("SEU_USUÁRIO", "SUA_SENHA", verificacaoCodigo )
+flavioBot = instagramBot("SEU_USERNAME", "SEU_PASSWORD", verificacaoCodigo )
 flavioBot.login()
