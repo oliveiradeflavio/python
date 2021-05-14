@@ -15,3 +15,6 @@ e irá comentar nas fotos baseado nessa hastag.
 
 ##### Biblioteca Selenium
 >pip install selenium
+
+##### Biblioteca PySimpleGUI
+>pip install PySimpleGUI

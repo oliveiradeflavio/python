@@ -10,15 +10,18 @@ https://www.github.com/oliveiradeflavio
 
 
 #importação de lib
+from typing import Sized
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import random
+from PySimpleGUI import PySimpleGUI as sg
 
 class instagramBot:
-    def __init__(self, username, password, verificacaoCodigo):
+    def __init__(self, username, password, hashtag_procurar, verificacaoCodigo):
         self.username = username
         self.password = password
+        self.hashtag_procurar = hashtag_procurar
         self.verificacaoCodigo = verificacaoCodigo
         self.driver = webdriver.Firefox(executable_path="/Users/foliveira/github/python/instagrambot/geckodriver") #caminho de onde está a biblioteca geckodriver
 
@@ -44,7 +47,7 @@ class instagramBot:
         campo_verificacao_codigo.send_keys(self.verificacaoCodigo)
         campo_verificacao_codigo.send_keys(Keys.RETURN)
         time.sleep(3)
-        self.comentar_nas_fotos_com_hastag('sunsire')
+        self.comentar_nas_fotos_com_hastag(self.hashtag_procurar)
 
     #digitando os comentário na velocidade humanos, as vezes acelerando as vezes um pouco mais lento.
     @staticmethod
@@ -67,7 +70,7 @@ class instagramBot:
         hrefs = driver.find_elements_by_tag_name('a')
         imagem_hrefs = [elem.get_attribute('href') for elem in hrefs]
         [href for href in imagem_hrefs if hashtag in href]
-        print(hashtag + ' fotos ' + str(len(imagem_hrefs)))
+        print('Hashtag: ' + hashtag + ' QNT Fotos: ' + str(len(imagem_hrefs)))
 
         for imagem_href in imagem_hrefs:
             driver.get(imagem_href)
@@ -79,7 +82,7 @@ class instagramBot:
                 curtir_post = driver.find_element_by_xpath("//span[@class='fr66n']")
                 curtir_post.click()
                 time.sleep(2)
-                print("like")
+                print("Like")
                 campo_comentario = driver.find_element_by_class_name('Ypffh')
                 time.sleep(random.randint(2,5))
                 #chama a função para que seja digitando mais lento ou mais rapido "como humano e não um bot"
@@ -92,6 +95,31 @@ class instagramBot:
                 print(e)
                 time.sleep(5)
 
-verificacaoCodigo = input("Digite o código de verificação: ")
-flavioBot = instagramBot("SEU_USERNAME", "SEU_PASSWORD", verificacaoCodigo )
-flavioBot.login()
+#Layout
+sg.theme('Reddit')
+layout = [
+    [sg.Text('Username'),sg.Input(key='username', size=(30, 4))],
+    [sg.Text('Password'),sg.Input(key='password',password_char='*', size=(30,4))],
+    [sg.Text('hashtag'),sg.Input(key='hashtag', size=(30,4))],
+    [sg.Text('Verificação 2 Fatores'),sg.Input(key='vefificacaoCodigo', size=(30,4))],
+    [sg.Button('Logar')]
+]
+
+#Janela
+janela = sg.Window('BOT INSTAGRAM', layout)
+
+#ler os eventos
+while True:
+    eventos, valores = janela.read()
+    if eventos == sg.WINDOW_CLOSED:
+        break
+    if eventos == 'Logar':
+        if valores['username'] == '' or valores['password'] == '' or valores['hashtag'] == '' or valores['vefificacaoCodigo'] == '':
+            sg.Popup('Há campos vazios a serem preenchidos', title='Atenção')
+        else:
+            flavioBot = instagramBot(valores['username'], valores['password'], valores['hashtag'], valores['vefificacaoCodigo'] )
+            flavioBot.login()
+
+#verificacaoCodigo = input("Digite o código de verificação: ")
+#flavioBot = instagramBot("SEU_USERNAME", "SEU_PASSWORD", verificacaoCodigo )
+#flavioBot.login()
