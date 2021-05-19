@@ -14,6 +14,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import random
 from PySimpleGUI import PySimpleGUI as sg
+import datetime
 
 
 class instagramBot:
@@ -70,7 +71,7 @@ class instagramBot:
         total_seguidores = total_seguidores.replace("seguidores", "")
         
         
-        for i in range(1, 53):
+        for i in range(1, int(total_seguidores)):
             time.sleep(3)
             sessao_nomes_seguidores = driver.find_element_by_xpath('/html/body/div[5]/div/div/div[2]/ul/div/li[%s]' % i)
             driver.execute_script("arguments[0].scrollIntoView();", sessao_nomes_seguidores)
@@ -87,7 +88,7 @@ class instagramBot:
         
     def comentar_no_sorteio(self):
         driver = self.driver
-        driver.get("url do sorteio")#url do sorteio
+        driver.get("https://www.instagram.com/p/CO6ipgjrhzV")
         time.sleep(3)
         driver.find_element_by_class_name('Ypffh').click()
         time.sleep(2)
@@ -108,15 +109,17 @@ class instagramBot:
                 self.digitando_como_humano('@'+str(perfil_seguidores), campo_comentario)
                 time.sleep(random.randint(10,20))
                 driver.find_element_by_xpath("//button[contains(text(), 'Publicar')]").click()
-                #time.sleep(3)
+                time.sleep(5)
                 #quando o contador atingir o valor 50, o sistema irá pausar no comentário
                 #e contador será zerado.A ssim tentamos evitar o bloqueio da conta. 
                 contador = contador + 1
                 driver.refresh()
                 if contador == 50:
                     contador = 0
-                    print('sistema em espera, voltará a comentar em 30 minutos')
+                    print('Sistema em espera, voltará a comentar em 30 minutos. Última pausa feita: ' + datetime.now().hour + " " + datetime.now().minute)
                     time.sleep(1800) #30minutos
+            
+            print("Comentarios Enviados. " + datetime.now().hour + " " + datetime.now().minute)
 
         except Exception as e:
             print(e)
