@@ -62,7 +62,7 @@ class instagramBot:
         time.sleep(3)
         
         #navegando até a terceira página
-        for i in range(1,3):
+        for i in range(1,8):
             driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
             time.sleep(5)
         
@@ -77,12 +77,13 @@ class instagramBot:
             driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
             #class="Ypffh" = campo de comentário foto
             try:
-                comentarios = ["Caramba! Tá top!","Essa foto ficou demais viu!", "Só fooootão","Curti muito essa foto!","Que fotão!!!!","Tooooop!!!","Eitaaaaaa que foto =D"]
+                time.sleep(5)
+                comentarios = ["Caramba! Tá top!🤖","Essa foto ficou demais viu!🤖", "Só fooootão🤖","Curti muito essa foto!🤖","Que fotão!!!!🤖","Tooooop!!!🤖","Eitaaaaaa que foto =D🤖"]
                 driver.find_element_by_class_name('Ypffh').click()
                 curtir_post = driver.find_element_by_xpath("//span[@class='fr66n']")
                 curtir_post.click()
-                time.sleep(2)
                 print("Like")
+                time.sleep(2)
                 campo_comentario = driver.find_element_by_class_name('Ypffh')
                 time.sleep(random.randint(2,5))
                 #chama a função para que seja digitando mais lento ou mais rapido "como humano e não um bot"
