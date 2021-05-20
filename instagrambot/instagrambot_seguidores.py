@@ -14,7 +14,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import random
 from PySimpleGUI import PySimpleGUI as sg
-import datetime
+from datetime import datetime
 
 
 class instagramBot:
@@ -23,7 +23,7 @@ class instagramBot:
         self.password = password
         self.verificacaoCodigo = verificacaoCodigo
         self.lista_seguidores = []
-        self.driver = webdriver.Firefox(executable_path="/Users/foliveira/github/python/instagrambot/geckodriver") #caminho de onde está a biblioteca geckodriver
+        self.driver = webdriver.Firefox(executable_path="C:\geckodriver") #caminho de onde está a biblioteca geckodriver
 
     def login(self):
         driver = self.driver
@@ -116,10 +116,10 @@ class instagramBot:
                 driver.refresh()
                 if contador == 50:
                     contador = 0
-                    print('Sistema em espera, voltará a comentar em 30 minutos. Última pausa feita: ' + datetime.now().hour + " " + datetime.now().minute)
+                    print('Sistema em espera, voltará a comentar em 30 minutos. Última pausa feita: ', datetime.now().hour,datetime.now().minute)
                     time.sleep(1800) #30minutos
             
-            print("Comentarios Enviados. " + datetime.now().hour + " " + datetime.now().minute)
+            print("Comentarios Enviados. ", datetime.now().hour,datetime.now().minute)
 
         except Exception as e:
             print(e)
