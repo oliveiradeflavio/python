@@ -77,9 +77,6 @@ Para Windows users pode ser preciso instalar o PyQT5.
 ```sh
 pip install PyQt5
 ```
-Python versão 3.9
-
-
 
 <!-- USAGE EXAMPLES -->
 ## Demo
