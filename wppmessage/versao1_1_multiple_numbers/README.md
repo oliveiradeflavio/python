@@ -13,7 +13,7 @@
 
 [![tela inicial][product-screenshot]]()
 
-A aplicação irá fazer o disparo automático e agendado de mensagems para o app WhatsApp usando uma lista de números que está em uma planilha do Excel.
+A aplicação irá fazer o disparo automático e agendado de mensagens para o app WhatsApp usando uma lista de números que está em uma planilha do Excel.
 
 ### Construído com
 

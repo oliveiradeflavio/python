@@ -13,7 +13,7 @@
 
 [![tela inicial][product-screenshot]]()
 
-A aplicação irá fazer o disparo automático e agendado de mensagems para o app WhatsApp. 
+A aplicação irá fazer o disparo automático e agendado de mensagens para o app WhatsApp. 
 
 ### Construído com
 
