@@ -2,7 +2,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 ![GitHub forks](https://img.shields.io/github/forks/oliveiradeflavio/python?style=for-the-badge)
 ![GitHub User's stars](https://img.shields.io/github/stars/oliveiradeflavio?style=for-the-badge)
-![GitHub followers](https://img.shields.io/github/followers/oliveiradeflavio?style=flat-square)
+![GitHub followers](https://img.shields.io/github/followers/oliveiradeflavio?style=for-the-badge)
 
 
 <h3 align="center">AGENDANDO MENSAGENS E ENVIANDO PELO WHATSAPP ATRAVÉS DO WPPMESSAGE</h3>
@@ -13,7 +13,7 @@
 
 [![tela inicial][product-screenshot]]()
 
-A aplicação irá fazer o disparo autoamtico e agendado de mensagems para o app WhatsApp. 
+A aplicação irá fazer o disparo automático e agendado de mensagems para o app WhatsApp. 
 
 ### Construído com
 
