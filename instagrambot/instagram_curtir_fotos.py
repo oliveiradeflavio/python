@@ -52,8 +52,8 @@ class instagramBot:
         driver.get("https://www.instagram.com/explore/tags/"+ hashtag + "/")
         time.sleep(3)
         
-        #navegando até a terceira página
-        for i in range(1,3):
+        #navegando página
+        for i in range(1,10):
             driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
             time.sleep(5)
         
