@@ -1,6 +1,6 @@
 """
-Esse bot irá pegar os seguidores da conta e fazer o comentário com esses seguidores (username)
-em um post de sorteio do instagram
+Esse bot irá clicar no botão seguir dos seguindos da conta especifica. 
+Irá navegar até o perfil da conta, clicar nos seguindos e nesse modal que abrir, irá clicar no botão seguir de cada username.
 
 Flávio Oliviera - 2021
 https://www.github.com/oliveiradeflavio
