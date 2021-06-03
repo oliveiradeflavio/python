@@ -53,7 +53,7 @@ class instagramBot:
         time.sleep(3)
         
         #navegando página
-        for i in range(1,10):
+        for i in range(1,100):
             driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
             time.sleep(5)
         
@@ -68,7 +68,6 @@ class instagramBot:
             driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
             try:
                 time.sleep(5)
-                driver.find_element_by_class_name('Ypffh').click()
                 curtir_post = driver.find_element_by_xpath("//span[@class='fr66n']")
                 curtir_post.click() #CURTI FOTO
                 print("Quantidade de Likes: " + str(qnt_likes))
