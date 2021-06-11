@@ -53,7 +53,7 @@ class instagramBot:
         time.sleep(3)
         
         #navegando página
-        for i in range(1,100):
+        for i in range(1,10):
             driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
             time.sleep(5)
         
@@ -74,6 +74,7 @@ class instagramBot:
                 qnt_likes = qnt_likes + 1
                 time.sleep(2)
                 time.sleep(random.randint(2,5))
+          
             except Exception as e:
                 print(e)
                 time.sleep(5)
