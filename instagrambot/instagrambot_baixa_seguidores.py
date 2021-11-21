@@ -73,7 +73,7 @@ class instagramBot:
         
         for i in range(1, int(total_seguidores)):
             time.sleep(3)
-            sessao_nomes_seguidores = driver.find_element_by_xpath('/html/body/div[5]/div/div/div[2]/ul/div/li[%s]' % i)
+            sessao_nomes_seguidores = driver.find_element_by_xpath('/html/body/div[6]/div/div/div[2]/ul/div/li[%s]' % i)
             driver.execute_script("arguments[0].scrollIntoView();", sessao_nomes_seguidores)
             time.sleep(1)
             texto = sessao_nomes_seguidores.text
