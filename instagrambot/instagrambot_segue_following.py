@@ -69,7 +69,7 @@ class instagramBot:
         for i in range(1, int(total_seguindo)):
             time.sleep(3)
             i = i + 3 #a cada usuário o scroll do modal vai abaixando, 
-            sessao_nomes_seguindo = driver.find_element_by_xpath('/html/body/div[5]/div/div/div[2]/ul/div/li[%s]' % i) #captura o nome do seguidor
+            sessao_nomes_seguindo = driver.find_element_by_xpath('/html/body/div[6]/div/div/div[2]/ul/div/li[%s]' % i) #captura o nome do seguidor
             driver.execute_script("arguments[0].scrollIntoView();", sessao_nomes_seguindo)
             driver.switch_to_active_element
             seguindo = driver.find_elements_by_xpath('//*[contains(text(), "Seguir")]')
