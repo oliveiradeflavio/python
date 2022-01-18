@@ -68,7 +68,7 @@ Veja os [problemas abertos] (https://github.com/oliveiradeflavio/python/issues) 
 <!-- CONTACT -->
 ## Contato
 
-Flávio Oliveira - [site](http://www.flaviodeoliveira.com.br) - fl.deoliveira@hotmail.com
+Flávio Oliveira - [LinkedIn](https://www.linkedin.com/in/fladoliveira/)
 
 Link do Repositório: [https://github.com/oliveiradeflavio/python](https://github.com/oliveiradeflavio/pythone)
 
