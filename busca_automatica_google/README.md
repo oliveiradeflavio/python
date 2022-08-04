@@ -5,7 +5,7 @@
 ![GitHub followers](https://img.shields.io/github/followers/oliveiradeflavio?style=for-the-badge)
 
 
-<h3 align="center">AGENDANDO MENSAGENS E ENVIANDO PELO WHATSAPP ATRAVÉS DO WPPMESSAGE</h3>
+<h3 align="center">FAZENDO BUSCAS AUTOMÁTICAS NO GOOGLE</h3>
 
 
 <!-- ABOUT THE PROJECT -->
