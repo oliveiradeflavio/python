@@ -41,6 +41,9 @@ Instalar as bibliotecas abaixo é obrigado para o funcionamento do script.
 ```sh
 pip install selenium
 ```
+```sh
+pip install webdriver-manager
+```
 
 <!-- USAGE EXAMPLES -->
 ## Demo
