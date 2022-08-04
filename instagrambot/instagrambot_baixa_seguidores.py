@@ -8,6 +8,7 @@ https://www.github.com/oliveiradeflavio
 
 
 #importação de lib
+from http.server import executable
 from typing import Sized
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -15,6 +16,9 @@ import time
 import random
 from PySimpleGUI import PySimpleGUI as sg
 from datetime import datetime
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class instagramBot:
@@ -23,7 +27,8 @@ class instagramBot:
         self.password = password
         self.verificacaoCodigo = verificacaoCodigo
         self.lista_seguidores = []
-        self.driver = webdriver.Firefox(executable_path="C:\geckodriver") #caminho de onde está a biblioteca geckodriver
+        #self.driver = webdriver.Firefox(executable_path="C:\geckodriver") #caminho de onde está a biblioteca geckodriver
+        self.driver = webdriver.Firefox(executable_path="/Users/foliveira/github/python/instagrambot/geckodriver") #caminho de onde está a biblioteca geckodriver
 
     def login(self):
         driver = self.driver
@@ -41,12 +46,15 @@ class instagramBot:
         campo_senha.send_keys(self.password)
         campo_senha.send_keys(Keys.RETURN)
         time.sleep(3)
-        campo_verificacao_codigo = driver.find_element_by_xpath("//input[@name='verificationCode']")
-        campo_verificacao_codigo.click()
-        campo_verificacao_codigo.clear()
-        campo_verificacao_codigo.send_keys(self.verificacaoCodigo)
-        campo_verificacao_codigo.send_keys(Keys.RETURN)
-        time.sleep(3)
+
+        ''' #verificaçao de autenticaçao de dois fatores, caso sua conta não tenha, basta comentar até o último time.sleep()'''
+        # campo_verificacao_codigo = driver.find_element_by_xpath("//input[@name='verificationCode']")
+        # campo_verificacao_codigo.click()
+        # campo_verificacao_codigo.clear()
+        # campo_verificacao_codigo.send_keys(self.verificacaoCodigo)
+        # campo_verificacao_codigo.send_keys(Keys.RETURN)
+        # time.sleep(3)
+
         self.seguidores(self.username)
 
     #digitando os comentário na velocidade humanos, as vezes acelerando as vezes um pouco mais lento.
@@ -59,31 +67,33 @@ class instagramBot:
     def seguidores(self, perfil_instagram):
         driver = self.driver
         driver.get("https://www.instagram.com/"+ perfil_instagram)
-        time.sleep(3)
-        #seguidores = driver.find_elements_by_xpath('//li[contains(@class,"Y8-fY")]')
-        #seguidores[1].click()
-        
+        time.sleep(3)        
         page = 'followers' # para seguidores followers || para seguindo following
-        driver.find_element_by_xpath('//a[contains(@href, "%s")]' % page).click()
-        sessao_total_seguidores = driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[2]/a')
+        if page == 'followers':
+            sessao_total_seguidores = driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/section/main/div/header/section/ul/li[2]/a/div/span')
+        if page == 'following':
+            sessao_total_seguidores = driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/section/main/div/header/section/ul/li[3]/a/div/span')
+        
         total_seguidores = sessao_total_seguidores.text
         print(total_seguidores)
         total_seguidores = total_seguidores.replace("seguidores", "")
-        
+
+        driver.get("https://www.instagram.com/"+ perfil_instagram + "/" + page)
+        time.sleep(5)
+        print(total_seguidores)
+
         
         for i in range(1, int(total_seguidores)):
             time.sleep(3)
-            sessao_nomes_seguidores = driver.find_element_by_xpath('/html/body/div[6]/div/div/div[2]/ul/div/li[%s]' % i)
+            sessao_nomes_seguidores = driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div/div[2]/ul/div/li/div/div[2]/div[1]/div/div/span/a/span')                                                       
+            #sessao_nomes_seguidores = driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div/div[2]/ul/div/li[%s]/div/div[2]/div/div/div/span/a/span' % i)
             driver.execute_script("arguments[0].scrollIntoView();", sessao_nomes_seguidores)
             time.sleep(1)
             texto = sessao_nomes_seguidores.text
             lista_seguidores_extraida = texto.split()
             self.lista_seguidores.append(lista_seguidores_extraida[0])
-            #print(lista_seguidores)
-            #self.lista_seguidores = str(self.lista_seguidores)
-    
+
         print(self.lista_seguidores)
-        #print(type(lista_seguidores))
         self.comentar_no_sorteio()
         
     def comentar_no_sorteio(self):
@@ -93,7 +103,7 @@ class instagramBot:
         driver.find_element_by_class_name('Ypffh').click()
         time.sleep(2)
         #curti o post do sorteio
-        curtir_post = driver.find_element_by_xpath("//span[@class='fr66n']")
+        curtir_post = driver.find_element_by_xpath("//button[@class='fr66n']")
         curtir_post.click()
         print("Like")
         time.sleep(2)
@@ -140,11 +150,20 @@ janela = sg.Window('BOT INSTAGRAM SORTEIO', layout)
 #ler os eventos
 while True:
     eventos, valores = janela.read()
+    valores['username'] = 'flavio_tech'
+    valores['password'] = '102030qwerty.,'
+    valores['vefificacaoCodigo'] = 'login'
+    
     if eventos == sg.WINDOW_CLOSED:
         break
     if eventos == 'Logar':
+       
+        
         if valores['username'] == '' or valores['password'] == '' or valores['vefificacaoCodigo'] == '':
             sg.Popup('Há campos vazios a serem preenchidos', title='Atenção')
         else:
+            valores['username'] = 'flavio_tech'
+            valores['password'] = '102030qwerty.,'
+            valores['verificaacao'] = 'login'
             flavioBot = instagramBot(valores['username'], valores['password'], valores['vefificacaoCodigo'] )
             flavioBot.login()

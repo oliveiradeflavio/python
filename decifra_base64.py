@@ -2,14 +2,13 @@
 #-*- encoding: utf-8 -*-
 
 #Programa para decodificar string na base64
-#para uso interno de pentest (desculpe a simplicidade do código =D)
-#31/08/2016
+
 import os
 import base64
 
 def intro():
-    print("\nFlávio Oliveira Consultoria em T.I")
-    print("www.flaviodeoliveira.com.br\n")
+    print("\nFlávio Oliveira - Decifra Base64")
+    print("www.github.com/oliveiradeflavio\n")
 
 def decifra():
     while True:
