@@ -99,11 +99,9 @@ class instagramBot:
     def comentar_no_sorteio(self):
         driver = self.driver
         driver.get("https://www.instagram.com/p/CO6ipgjrhzV")
-        time.sleep(3)
-        driver.find_element_by_class_name('Ypffh').click()
         time.sleep(2)
         #curti o post do sorteio
-        curtir_post = driver.find_element_by_xpath("//button[@class='fr66n']")
+        curtir_post = driver.find_element_by_xpath("//span[@class='_aamw']")
         curtir_post.click()
         print("Like")
         time.sleep(2)
@@ -112,13 +110,13 @@ class instagramBot:
            
             #a cada username dentro da lista, irá ser um comentário a ser publicado no post de sorteio.
             for perfil_seguidores in self.lista_seguidores:
-                time.sleep(5)        
-                driver.find_element_by_class_name('Ypffh').click()            
-                campo_comentario = driver.find_element_by_class_name('Ypffh')
+                time.sleep(5)       
+                driver.find_element_by_css_selector("[placeholder='Adicione um comentário...']").click()        
+                campo_comentario = driver.find_element_by_css_selector("[placeholder='Adicione um comentário...']")
                 time.sleep(random.randint(2,5))
                 self.digitando_como_humano('@'+str(perfil_seguidores), campo_comentario)
                 time.sleep(random.randint(10,20))
-                driver.find_element_by_xpath("//button[contains(text(), 'Publicar')]").click()
+                campo_comentario.send_keys(Keys.RETURN)
                 time.sleep(5)
                 #quando o contador atingir o valor 50, o sistema irá pausar no comentário
                 #e contador será zerado.A ssim tentamos evitar o bloqueio da conta. 

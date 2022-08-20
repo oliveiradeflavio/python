@@ -79,18 +79,21 @@ class instagramBot:
             try:
                 time.sleep(5)
                 comentarios = ["Caramba! Tá top!🤖","Essa foto ficou demais viu!🤖", "Só fooootão🤖","Curti muito essa foto!🤖","Que fotão!!!!🤖","Tooooop!!!🤖","Eitaaaaaa que foto =D🤖"]
-                driver.find_element_by_class_name('Ypffh').click()
-                curtir_post = driver.find_element_by_xpath("//span[@class='fr66n']")
+                #driver.find_element_by_class_name('_aaoa').click() //abre a opção de emoticons
+                curtir_post = driver.find_element_by_xpath("//span[@class='_aamw']")
                 curtir_post.click()
                 print("Like")
                 time.sleep(2)
-                campo_comentario = driver.find_element_by_class_name('Ypffh')
+                #campo_comentario = driver.find_element_by_class_name('_aaoa')
+                driver.find_element_by_css_selector("[placeholder='Adicione um comentário...']").click()
+                campo_comentario = driver.find_element_by_css_selector("[placeholder='Adicione um comentário...']")
                 time.sleep(random.randint(2,5))
                 #chama a função para que seja digitando mais lento ou mais rapido "como humano e não um bot"
                 self.digitando_como_humano(random.choice(comentarios), campo_comentario)
                 #o ideal é colocar um valor maior, para que não seja identificado como bot.
                 time.sleep(random.randint(10,20))
-                driver.find_element_by_xpath("//button[contains(text(), 'Publicar')]").click()
+                #driver.find_element_by_xpath("//button[contains(text(), 'Publicar')]").click()
+                campo_comentario.send_keys(Keys.RETURN)
                 time.sleep(3)
             except Exception as e:
                 print(e)

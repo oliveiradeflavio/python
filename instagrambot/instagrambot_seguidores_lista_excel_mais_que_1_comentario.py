@@ -58,10 +58,8 @@ class instagramBot:
         driver = self.driver
         driver.get("https://www.instagram.com/p/CO6ipgjrhzV")
         time.sleep(3)
-        driver.find_element_by_class_name('Ypffh').click()
-        time.sleep(2)
         #curti o post do sorteio
-        curtir_post = driver.find_element_by_xpath("//span[@class='fr66n']")
+        curtir_post = driver.find_element_by_xpath("//span[@class='_aamw']")
         curtir_post.click()
         print("Like")
         time.sleep(2)
@@ -73,15 +71,14 @@ class instagramBot:
             
             tamanho = len(self.lista_seguidores['username']) # para publicar 2 comentário ou mais mude a variavel 2 do range
             for perfil_seguidores in range(0, tamanho, 2): #nesse caso estamos publicando 2 comentários por vez
-                time.sleep(5)        
-                driver.find_element_by_class_name('Ypffh').click()            
-                campo_comentario = driver.find_element_by_class_name('Ypffh')
+                time.sleep(5)      
+                campo_comentario = driver.find_element_by_css_selector("[placeholder='Adicione um comentário...']")
                 time.sleep(random.randint(2,5))
                 #para comentar mais que 2 comentário, altere a variavel 2 do range(0, tamanho, 2) para o número de comentário que você deseja
                 #adicione a quantidade correspondente ao número de comentários self.lista_seguidores['username'][perfil_seguidores+1] na função digitando_como_humano
                 self.digitando_como_humano('@'+self.lista_seguidores["username"][perfil_seguidores] + ' @'+self.lista_seguidores["username"][perfil_seguidores+1], campo_comentario)
                 time.sleep(random.randint(10,20))
-                driver.find_element_by_xpath("//button[contains(text(), 'Publicar')]").click()
+                campo_comentario.send_keys(Keys.RETURN)
                 time.sleep(5)
                 #quando o contador atingir o valor 50, o sistema irá pausar no comentário
                 #e contador será zerado.A ssim tentamos evitar o bloqueio da conta. 
