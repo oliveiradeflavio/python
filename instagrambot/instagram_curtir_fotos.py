@@ -1,14 +1,13 @@
 """
 Curtir fotos
-O teste foi feito, foi em um instagram que possui a autenticação 2 fatores, 
+O teste foi feito em um instagram que possui a autenticação 2 fatores, 
 por isso temos a parte de digitação da verificação de código.
 
 Flávio Oliviera - 2021
-https://www.github.com/oliveiradeflavio
+www.flaviodeoliveira.com.br
 """
 
 #importação de lib
-from typing import Sized
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
