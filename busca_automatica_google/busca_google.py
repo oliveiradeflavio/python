@@ -10,6 +10,7 @@ from selenium.webdriver.support.ui import Select
 import time
 import requests
 import random
+from selenium.common.exceptions import NoSuchElementException
 
 class Busca:
     def __init__(self, url, palavra, quero_esse_link, total_paginas_busca):
@@ -18,11 +19,17 @@ class Busca:
         self.quero_esse_link = quero_esse_link
         self.total_paginas_busca = total_paginas_busca
 
+        #start no google chrome maximizado, Configurando as opções dos drivers do Selenium
         chrome_options = Options()
-        chrome_options.add_experimental_option(
-            "excludeSwitches", ["enable-logging"])
-        self.driver = webdriver.Chrome(
-            ChromeDriverManager().install(), options=chrome_options)
+        chrome_options.add_argument("--start-maximized")
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        #chrome_options.add_argument("--headless") 
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--disable-extensions")
+        chrome_options.add_argument("--disable-notifications")    
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
 
     def pesquisar(self):
         driver = self.driver
@@ -36,8 +43,14 @@ class Busca:
 
         driver.get(self.url)
         time.sleep(3)
-        campo_pesquisa_google = driver.find_element(
-            By.XPATH, "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")
+
+        try:
+            driver.switch_to.frame(driver.find_element_by_id("yDmH0d"))
+            driver.find_element_by_id("yDmH0d").send_keys(Keys.ESCAPE)
+        except:
+            pass
+
+        campo_pesquisa_google = driver.find_element_by_tag_name("textarea")
         campo_pesquisa_google.click()
         campo_pesquisa_google.clear()
 
@@ -65,17 +78,22 @@ class Busca:
                 driver.execute_script(
                     "window.scrollTo(0, document.body.scrollHeight);")
                 time.sleep(3)
-                driver.find_element(By.ID, "pnnext").click()
-                time.sleep(3)
-                if self.existe_texto(self.quero_esse_link):
-                    links = driver.find_elements_by_tag_name("a")
-                    for link in links:
-                        if self.quero_esse_link in link.text:
-                            link.click()
-                            time.sleep(5) # tempo para o link carregar
+                try:
+                    if(driver.find_element(By.ID, "pnnext")):
+                        driver.find_element(By.ID, "pnnext").click()
+                        time.sleep(3)
+                        if self.existe_texto(self.quero_esse_link):
+                            links = driver.find_elements_by_tag_name("a")
+                            for link in links:
+                                if self.quero_esse_link in link.text:
+                                    link.click()
+                                    time.sleep(5) # tempo para o link carregar
+                                    break
                             break
-                    break
-                else:
+                        else:
+                            continue
+                except NoSuchElementException:
+                    print("Não encontrei mais paginas para procurar")
                     continue
             
             print("Busca finalizada sem proxy")
@@ -106,7 +124,7 @@ class Busca:
                 break
             numero_servidor += 1
 
-        campo_proxy_input = driver.find_element(By.XPATH, "/html/body/div[2]/main/div[1]/div/div[3]/form/div[2]/input") # seleciona o campo de input do proxy
+        campo_proxy_input = driver.find_element_by_tag_name("input")# seleciona o campo de input do proxy
         campo_proxy_input.click()
         campo_proxy_input.clear()
         campo_proxy_input.send_keys(self.url)
@@ -152,18 +170,22 @@ class Busca:
                     driver.execute_script(
                         "window.scrollTo(0, document.body.scrollHeight);")
                     time.sleep(3)
-                    driver.find_element(By.ID, "pnnext").click()
-                    time.sleep(3)
-                    if self.existe_texto(self.quero_esse_link):
-                        links = driver.find_elements_by_tag_name("a")
-                        for link in links:
-                            if self.quero_esse_link in link.text:
-                                link.click()
-                                time.sleep(5) #tempo para carregar o site quando é encontrado
-                                break  
-                        break    
-                    else:
-                        continue
+                    try:
+                        driver.find_element(By.ID, "pnnext").click()
+                        time.sleep(3)
+                        if self.existe_texto(self.quero_esse_link):
+                            links = driver.find_elements_by_tag_name("a")
+                            for link in links:
+                                if self.quero_esse_link in link.text:
+                                    link.click()
+                                    time.sleep(5) #tempo para carregar o site quando é encontrado
+                                    break  
+                            break    
+                        else:
+                            continue
+                    except NoSuchElementException:
+                        print("Não tem mais páginas para procurar")
+                        break
         else:
             print("Estou na página errada")
             self.proxy()
